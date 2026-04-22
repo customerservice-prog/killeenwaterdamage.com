@@ -1,4 +1,3 @@
-# killeenwaterdamage.com
 User-agent: *
 Allow: /
 
