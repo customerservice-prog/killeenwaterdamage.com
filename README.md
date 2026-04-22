@@ -4,9 +4,9 @@ Local lead-generation site for water damage restoration in Killeen, TX and surro
 
 ## Status
 
-Visual front-end is in place (static HTML/CSS/JS). Ready for Cursor to extend with:
-- Real phone number wiring (replace all `+1254XXXXXXX` placeholders with the live CallRail number).
-- Replacing `REPLACE WITH KILLEEN ADDRESS` in the JSON-LD schema with the verified Google Business Profile address.
+Visual front-end is in place (static HTML/CSS/JS). **Contact and NAP (name, address, phone):** update `site.config.js` only — at load time it applies `phone`, `email`, and `address` to `tel:` / `sms:` / `mailto:` links, visible phone text, `document.title` / meta description, and the Local Business JSON-LD. HTML may still list legacy placeholder `tel:` / `href` values; the script overwrites them from `SITE_CONFIG`.
+- Live CallRail (or other) number: set `phone.e164`, `phone.display`, and `phone.schema` in `site.config.js`.
+- Mailing or virtual mailbox for GBP: set `address.streetLine` (see `TODO(virtual-mailbox)` in that file).
 - Service detail pages (`/services/water-extraction`, `/services/mold-remediation`, etc.).
 - Blog (`/blog/water-damage-cost-killeen`, `/blog/burst-pipe-killeen-what-to-do`, `/blog/homeowners-insurance-water-damage-texas`).
 - Contact form backend (Cloudflare Worker or Formspree) for the "text us photos" CTA fallback.
@@ -17,6 +17,7 @@ Visual front-end is in place (static HTML/CSS/JS). Ready for Cursor to extend wi
 ```
 /
 ├── index.html      # Single-page landing site
+├── site.config.js  # NAP, phone, email, JSON-LD values (edit here only)
 ├── styles.css      # All design system + responsive styles
 ├── script.js       # Year stamp, smooth scroll, sticky-call hide, click tracking
 └── README.md       # This file
@@ -34,8 +35,8 @@ Visual front-end is in place (static HTML/CSS/JS). Ready for Cursor to extend wi
 
 ## SEO setup checklist (Cursor or manual)
 
-- [ ] Replace placeholder phone number in 9 spots
-- [ ] Replace placeholder address in JSON-LD schema
+- [ ] Set phone and address in `site.config.js` (replaces all former scattered placeholders)
+- [ ] Confirm `address.streetLine` matches your Google Business Profile
 - [ ] Add favicon + `og.jpg` (1200x630 social card)
 - [ ] Add `robots.txt` and `sitemap.xml`
 - [ ] Verify Google Search Console (DNS TXT or HTML file)
