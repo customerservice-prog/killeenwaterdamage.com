@@ -52,9 +52,9 @@ document.addEventListener('DOMContentLoaded', () => {
       try {
         const res = await fetch('/api/lead', { method: 'POST', body: new FormData(form) });
         if (!res.ok) throw new Error('request failed');
-        form.setAttribute('hidden', 'hidden');
+        form.hidden = true;
         form.setAttribute('aria-hidden', 'true');
-        success.removeAttribute('hidden');
+        success.hidden = false;
         success.scrollIntoView({ behavior: 'smooth', block: 'center' });
       } catch {
         err('lead-err-name', "We couldn't send that just now. Please call the number above— we're 24/7.");

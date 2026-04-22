@@ -187,6 +187,10 @@ a.card:hover h3 { text-decoration: underline; text-underline-offset: 3px; }
 .lead-form__err { display: block; font-size: 13px; color: #b42318; min-height: 1.1em; margin-top: 0.2rem; }
 .lead-form__success { background: #ecfdf3; border: 1px solid #6ee7b7; border-radius: var(--radius); padding: 1.25rem 1.5rem; margin-top: 1.25rem; color: #065f46; }
 .accent-link { color: var(--navy); font-weight: 800; }
+.estimate { max-width: 640px; margin: 0 auto; }
+.estimate .section__title, .estimate .section__lead { text-align: center; }
+.estimate .section__lead { margin-left: auto; margin-right: auto; }
+#lead-submit { width: 100%; margin-top: 0.5rem; }
 
 /* Mobile tap minimums (44×44) */
 .topbar a,

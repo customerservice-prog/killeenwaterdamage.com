@@ -171,10 +171,10 @@
     </div>
   </section>
 
-  <section id="estimate" class="section section--alt" aria-labelledby="estimate-title">
-    <div class="container" style="max-width: 640px">
-      <h2 id="estimate-title" class="section__title" style="text-align: center">Request a free estimate</h2>
-      <p class="section__lead" style="text-align: center; margin-left: auto; margin-right: auto">Tell us what happened. We&rsquo;ll call you in <strong>15 minutes</strong> during business dispatch windows (24/7 phone always).</p>
+  <section id="estimate" class="section section--alt estimate" aria-labelledby="estimate-title">
+    <div class="container">
+      <h2 id="estimate-title" class="section__title">Request a free estimate</h2>
+      <p class="section__lead">Tell us what happened. We&rsquo;ll call you in <strong>15 minutes</strong> during business dispatch windows (24/7 phone always).</p>
       <form class="lead-form" id="lead-form" novalidate enctype="multipart/form-data" method="post" action="/api/lead" lang="en">
         <p class="lead-form__field">
           <label for="lead-name">Name <span aria-hidden="true">*</span></label>
@@ -202,7 +202,7 @@
           <span class="lead-form__hint" id="lead-photo-hint">JPG, PNG, or WebP, under 8 MB.</span>
           <span class="lead-form__err" id="lead-err-photo" role="alert"></span>
         </p>
-        <button type="submit" class="btn btn--primary btn--xl" style="width: 100%; margin-top: 0.5rem" id="lead-submit">Send &mdash; we&rsquo;ll call you in 15 minutes</button>
+        <button type="submit" class="btn btn--primary btn--xl" id="lead-submit">Send &mdash; we&rsquo;ll call you in 15 minutes</button>
       </form>
       <div class="lead-form__success" id="lead-success" hidden role="status">
         <p><strong>We&rsquo;ll call you in 15 minutes.</strong> If this is a life-safety emergency, <a href="tel:+1254XXXXXXX" class="accent-link">call <span data-site-phone-text>(254) XXX-XXXX</span></a> right now so dispatch can route a truck.</p>
