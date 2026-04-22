@@ -1,30 +1,34 @@
 /**
  * killeenwaterdamage.com — contact & NAP (single source of truth)
- * Update this file only; phone, email, and address propagate across the site.
+ * Update PHONE_TEL, PHONE_DISPLAY, and (when available) phoneSchema before go-live.
  */
 (function () {
   'use strict';
 
+  // TODO: Replace with real CallRail 254 number before going live
+  const PHONE_TEL = 'tel:+12540000000';
+  const PHONE_DISPLAY = '(254) XXX-XXXX';
+
+  /**
+   * TODO: iPostal1 (or verified GBP) E.123-style telephone for JSON-LD when you have a live number.
+   * Leave null/empty to omit "telephone" from LocalBusiness schema (avoids placeholder rich-result errors).
+   */
+  const PHONE_SCHEMA = null;
+
+  /**
+   * TODO: iPostal1 virtual mailbox — add streetAddress and set hasStreet: true, or set streetLine
+   * in SITE_CONFIG below when you wire NAP. Until then, street is omitted from JSON-LD.
+   * Example: "123 W Trimmier Rd Ste 100" (Killeen, TX)
+   */
   var SITE_CONFIG = {
     phone: {
-      /** E.164 for tel: / sms: (digits after optional +) */
-      e164: '+1254XXXXXXX',
-      /** Shown in UI, title, and meta */
-      display: '(254) XXX-XXXX',
-      /**
-       * For schema.org "telephone" (include country; hyphens help readability)
-       * Example: +1-254-555-0100
-       */
-      schema: '+1-254-XXX-XXXX',
+      e164: '+12540000000',
     },
     email: 'help@killeenwaterdamage.com',
-    /**
-     * postalAddress for JSON-LD
-     * TODO(virtual-mailbox): Set streetLine to your verified virtual mailbox
-     * or Google Business Profile street address before going live.
-     */
     address: {
-      streetLine: 'REPLACE WITH KILLEEN ADDRESS',
+      // TODO: iPostal1 virtual mailbox — set streetLine and hasStreet: true (see top-of-file note)
+      hasStreet: false,
+      streetLine: '',
       addressLocality: 'Killeen',
       addressRegion: 'TX',
       postalCode: '76541',
@@ -32,10 +36,6 @@
     },
   };
 
-  /**
-   * Build tel: / sms: URIs. If e164 still contains X placeholders, pass through
-   * (for pre-launch); once you set 11-digit E.164, digits are normalized.
-   */
   function setMetaProp(property, content) {
     var el = document.querySelector('meta[property="' + property + '"]');
     if (el) el.setAttribute('content', content);
@@ -46,21 +46,11 @@
   }
 
   function contactUris() {
-    var p = String(SITE_CONFIG.phone.e164 || '');
-    if (/X/i.test(p)) {
-      return {
-        tel: 'tel:' + p.replace(/\s/g, ''),
-        sms: 'sms:' + p.replace(/\s/g, ''),
-      };
+    var p = String(PHONE_TEL);
+    if (p.indexOf('tel:') === 0) {
+      return { tel: p, sms: p.replace(/^tel:/, 'sms:') };
     }
-    var digits = p.replace(/\D/g, '');
-    if (digits[0] === '1' && digits.length === 11) {
-      return { tel: 'tel:+' + digits, sms: 'sms:+' + digits };
-    }
-    if (digits.length === 10) {
-      return { tel: 'tel:+1' + digits, sms: 'sms:+1' + digits };
-    }
-    return { tel: 'tel:+' + digits, sms: 'sms:+' + digits };
+    return { tel: 'tel:' + p, sms: 'sms:' + p.replace(/[^\d+]/g, '') };
   }
 
   function applySiteConfig() {
@@ -80,17 +70,13 @@
       if (meta) {
         meta.setAttribute(
           'content',
-          'Water damage in Killeen, TX? IICRC-certified crew on call 24/7. 60-minute response, direct insurance billing. Burst pipes, floods, mold. Call ' +
-            c.phone.display +
-            ' now.'
+          'Water damage in Killeen, TX? IICRC-certified crew on call 24/7. 60-minute response across Bell County, direct insurance billing, free on-site assessment. Available now.'
         );
       }
       var ogTitle =
         '24/7 Water Damage in Killeen, TX | Killeen Water Damage Restoration';
       var ogDesc =
-        'Water damage in Killeen, TX? IICRC-certified team. 60-minute response, insurance billing, extraction & drying. Call ' +
-        c.phone.display +
-        ' 24/7.';
+        'Water damage in Killeen, TX? IICRC-certified team. 60-minute response, insurance billing, extraction & drying. Tap to call from mobile—available now.';
       setMetaProp('og:title', ogTitle);
       setMetaProp('og:description', ogDesc);
       setMetaProp('twitter:title', ogTitle);
@@ -107,10 +93,20 @@
       a.setAttribute('href', 'mailto:' + c.email);
       a.textContent = c.email;
     });
-    // Visible phone text (any element that marks itself)
     document.querySelectorAll('[data-site-phone-text]').forEach(function (el) {
-      el.textContent = c.phone.display;
+      el.textContent = PHONE_DISPLAY;
     });
+
+    var addressObj = {
+      '@type': 'PostalAddress',
+      addressLocality: c.address.addressLocality,
+      addressRegion: c.address.addressRegion,
+      postalCode: c.address.postalCode,
+      addressCountry: c.address.addressCountry,
+    };
+    if (c.address.hasStreet && c.address.streetLine) {
+      addressObj.streetAddress = c.address.streetLine;
+    }
 
     var ld = {
       '@context': 'https://schema.org',
@@ -118,16 +114,8 @@
       '@type': 'EmergencyService',
       name: 'Killeen Water Damage Restoration',
       image: 'https://killeenwaterdamage.com/og.jpg',
-      telephone: c.phone.schema,
       priceRange: '$$',
-      address: {
-        '@type': 'PostalAddress',
-        streetAddress: c.address.streetLine,
-        addressLocality: c.address.addressLocality,
-        addressRegion: c.address.addressRegion,
-        postalCode: c.address.postalCode,
-        addressCountry: c.address.addressCountry,
-      },
+      address: addressObj,
       areaServed: [
         'Killeen',
         'Harker Heights',
@@ -155,6 +143,10 @@
       url: 'https://killeenwaterdamage.com/',
     };
 
+    if (PHONE_SCHEMA) {
+      ld.telephone = PHONE_SCHEMA;
+    }
+
     var ldNode = document.getElementById('ld-json-local-business');
     if (ldNode) {
       ldNode.textContent = JSON.stringify(ld, null, 2);
@@ -162,6 +154,7 @@
   }
 
   window.SITE_CONFIG = SITE_CONFIG;
+  window.PhoneConfig = { PHONE_TEL: PHONE_TEL, PHONE_DISPLAY: PHONE_DISPLAY };
   window.applySiteConfig = applySiteConfig;
 
   if (document.readyState === 'loading') {
