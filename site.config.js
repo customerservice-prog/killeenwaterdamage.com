@@ -76,7 +76,7 @@
       var ogTitle =
         '24/7 Water Damage in Killeen, TX | Killeen Water Damage Restoration';
       var ogDesc =
-        'Water damage in Killeen, TX? IICRC-certified team. 60-minute response, insurance billing, extraction & drying. Tap to call from mobile—available now.';
+        'Water damage in Killeen, TX? IICRC-certified crew on call 24/7. 60-minute response across Bell County, direct insurance billing, free on-site assessment. Available now.';
       setMetaProp('og:title', ogTitle);
       setMetaProp('og:description', ogDesc);
       setMetaProp('twitter:title', ogTitle);
