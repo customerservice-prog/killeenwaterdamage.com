@@ -1,0 +1,5 @@
+# killeenwaterdamage.com
+User-agent: *
+Allow: /
+
+Sitemap: https://killeenwaterdamage.com/sitemap.xml

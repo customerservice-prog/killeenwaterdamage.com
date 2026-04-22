@@ -20,6 +20,11 @@ Visual front-end is in place (static HTML/CSS/JS). **Contact and NAP (name, addr
 ├── site.config.js  # NAP, phone, email, JSON-LD values (edit here only)
 ├── styles.css      # All design system + responsive styles
 ├── script.js       # Year stamp, smooth scroll, sticky-call hide, click tracking
+├── favicon.ico
+├── favicon.svg
+├── og.jpg          # 1200×630 Open Graph / Twitter card
+├── robots.txt
+├── sitemap.xml     # Update when adding new HTML pages
 └── README.md       # This file
 ```
 

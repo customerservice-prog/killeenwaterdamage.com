@@ -36,6 +36,15 @@
    * Build tel: / sms: URIs. If e164 still contains X placeholders, pass through
    * (for pre-launch); once you set 11-digit E.164, digits are normalized.
    */
+  function setMetaProp(property, content) {
+    var el = document.querySelector('meta[property="' + property + '"]');
+    if (el) el.setAttribute('content', content);
+  }
+  function setMetaName(name, content) {
+    var el = document.querySelector('meta[name="' + name + '"]');
+    if (el) el.setAttribute('content', content);
+  }
+
   function contactUris() {
     var p = String(SITE_CONFIG.phone.e164 || '');
     if (/X/i.test(p)) {
@@ -74,6 +83,16 @@
           ' now.'
       );
     }
+    var ogTitle =
+      'Killeen Water Damage Restoration | 24/7 Emergency | ' + c.phone.display;
+    var ogDesc =
+      'Water damage in Killeen, TX? IICRC-certified team. 60-minute response, insurance billing, extraction & drying. Call ' +
+      c.phone.display +
+      ' 24/7.';
+    setMetaProp('og:title', ogTitle);
+    setMetaProp('og:description', ogDesc);
+    setMetaProp('twitter:title', ogTitle);
+    setMetaName('twitter:description', ogDesc);
 
     document.querySelectorAll('a[href^="tel:"]').forEach(function (a) {
       a.setAttribute('href', telUri);
