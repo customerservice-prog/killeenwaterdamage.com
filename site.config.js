@@ -73,8 +73,7 @@
       document.body && document.body.hasAttribute('data-config-home');
     if (isHome) {
       var titleBase =
-        'Killeen Water Damage Restoration | 24/7 Emergency Response | ' +
-        c.phone.display;
+        '24/7 Water Damage in Killeen, TX | Killeen Water Damage Restoration';
       document.title = titleBase;
 
       var meta = document.querySelector('meta[name="description"]');
@@ -87,7 +86,7 @@
         );
       }
       var ogTitle =
-        'Killeen Water Damage Restoration | 24/7 Emergency | ' + c.phone.display;
+        '24/7 Water Damage in Killeen, TX | Killeen Water Damage Restoration';
       var ogDesc =
         'Water damage in Killeen, TX? IICRC-certified team. 60-minute response, insurance billing, extraction & drying. Call ' +
         c.phone.display +
