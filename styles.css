@@ -188,6 +188,7 @@ a.card:hover h3 { text-decoration: underline; text-underline-offset: 3px; }
 .svc-footer-links { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 2rem; }
 .svc-footer-links a { text-decoration: underline; }
 .post-meta { color: var(--muted); font-size: 14px; margin-bottom: 0.5rem; }
+.post-eat { font-size: 14px; color: var(--muted); margin: 0.4rem 0 1.25rem; line-height: 1.55; }
 .post-lead { font-size: 1.1rem; font-weight: 600; color: var(--navy); margin-bottom: 1.5rem; }
 .blog-cta { background: var(--bg); border-radius: var(--radius); padding: 1.25rem 1.5rem; margin: 2rem 0; border: 1px solid #eef1f7; }
 .blog-cta .btn { margin-top: 0.5rem; }
