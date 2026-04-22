@@ -11,24 +11,19 @@
   /** E.123-style for JSON-LD `telephone` (schema.org). */
   const PHONE_SCHEMA = '+1-254-236-8509';
 
-  /**
-   * TODO: iPostal1 virtual mailbox — add streetAddress and set hasStreet: true, or set streetLine
-   * in SITE_CONFIG below when you wire NAP. Until then, street is omitted from JSON-LD.
-   * Example: "123 W Trimmier Rd Ste 100" (Killeen, TX)
-   */
   var SITE_CONFIG = {
     phone: {
       e164: '+12542368509',
     },
     email: 'help@killeenwaterdamage.com',
     address: {
-      // TODO: iPostal1 virtual mailbox — set streetLine and hasStreet: true (see top-of-file note)
-      hasStreet: false,
-      streetLine: '',
-      addressLocality: 'Killeen',
+      hasStreet: true,
+      streetLine: '2112 SW H.K. Dodgen Loop Suite 183',
+      addressLocality: 'Temple',
       addressRegion: 'TX',
-      postalCode: '76541',
+      postalCode: '76504',
       addressCountry: 'US',
+      addressCountryName: 'United States',
     },
   };
 
@@ -91,6 +86,18 @@
     });
     document.querySelectorAll('[data-site-phone-text]').forEach(function (el) {
       el.textContent = PHONE_DISPLAY;
+    });
+
+    var a = c.address;
+    var addressLines = [];
+    if (a.streetLine) addressLines.push(a.streetLine);
+    addressLines.push(
+      a.addressLocality + ', ' + a.addressRegion + ' ' + a.postalCode
+    );
+    addressLines.push(a.addressCountryName || 'United States');
+    var addressText = addressLines.join('\n');
+    document.querySelectorAll('[data-site-address]').forEach(function (el) {
+      el.textContent = addressText;
     });
 
     var addressObj = {
