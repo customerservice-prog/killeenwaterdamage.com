@@ -59,6 +59,30 @@ img { max-width: 100%; display: block; }
   position: sticky; top: 0; z-index: 50;
 }
 .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; color: var(--navy); font-size: 18px; }
+
+/* Visible breadcrumb (sub-pages) */
+.breadcrumb {
+  font-size: 14px;
+  color: var(--muted);
+  padding: 12px 24px 0;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.breadcrumb a { color: var(--muted); text-decoration: underline; }
+.breadcrumb a:hover { color: var(--navy); }
+.breadcrumb__sep { margin: 0 0.2rem; user-select: none; }
+.breadcrumb__current { color: var(--text); font-weight: 600; }
+
+/* Homepage service cards: avoid auto-fit row height gaps (stable 3-column → 2 → 1) */
+#services .cards {
+  grid-template-columns: repeat(3, 1fr);
+}
+@media (max-width: 1000px) {
+  #services .cards { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 620px) {
+  #services .cards { grid-template-columns: 1fr; }
+}
 .logo__mark { font-size: 24px; }
 .nav { display: flex; gap: 24px; }
 .nav a { color: var(--text); font-weight: 600; }
