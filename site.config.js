@@ -1,19 +1,15 @@
 /**
  * killeenwaterdamage.com — contact & NAP (single source of truth)
- * Update PHONE_TEL, PHONE_DISPLAY, and (when available) phoneSchema before go-live.
+ * Update PHONE_TEL, PHONE_DISPLAY, or PHONE_SCHEMA if the business line changes.
  */
 (function () {
   'use strict';
 
-  // TODO: Replace with real CallRail 254 number before going live
-  const PHONE_TEL = 'tel:+12540000000';
-  const PHONE_DISPLAY = '(254) XXX-XXXX';
+  const PHONE_TEL = 'tel:+12542368509';
+  const PHONE_DISPLAY = '(254) 236-8509';
 
-  /**
-   * TODO: iPostal1 (or verified GBP) E.123-style telephone for JSON-LD when you have a live number.
-   * Leave null/empty to omit "telephone" from LocalBusiness schema (avoids placeholder rich-result errors).
-   */
-  const PHONE_SCHEMA = null;
+  /** E.123-style for JSON-LD `telephone` (schema.org). */
+  const PHONE_SCHEMA = '+1-254-236-8509';
 
   /**
    * TODO: iPostal1 virtual mailbox — add streetAddress and set hasStreet: true, or set streetLine
@@ -22,7 +18,7 @@
    */
   var SITE_CONFIG = {
     phone: {
-      e164: '+12540000000',
+      e164: '+12542368509',
     },
     email: 'help@killeenwaterdamage.com',
     address: {
