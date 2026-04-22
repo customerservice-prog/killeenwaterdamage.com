@@ -69,30 +69,34 @@
     var telUri = uris.tel;
     var smsUri = uris.sms;
 
-    var titleBase =
-      'Killeen Water Damage Restoration | 24/7 Emergency Response | ' +
-      c.phone.display;
-    document.title = titleBase;
+    var isHome =
+      document.body && document.body.hasAttribute('data-config-home');
+    if (isHome) {
+      var titleBase =
+        'Killeen Water Damage Restoration | 24/7 Emergency Response | ' +
+        c.phone.display;
+      document.title = titleBase;
 
-    var meta = document.querySelector('meta[name="description"]');
-    if (meta) {
-      meta.setAttribute(
-        'content',
-        'Water damage in Killeen, TX? IICRC-certified crew on call 24/7. 60-minute response, direct insurance billing. Burst pipes, floods, mold. Call ' +
-          c.phone.display +
-          ' now.'
-      );
+      var meta = document.querySelector('meta[name="description"]');
+      if (meta) {
+        meta.setAttribute(
+          'content',
+          'Water damage in Killeen, TX? IICRC-certified crew on call 24/7. 60-minute response, direct insurance billing. Burst pipes, floods, mold. Call ' +
+            c.phone.display +
+            ' now.'
+        );
+      }
+      var ogTitle =
+        'Killeen Water Damage Restoration | 24/7 Emergency | ' + c.phone.display;
+      var ogDesc =
+        'Water damage in Killeen, TX? IICRC-certified team. 60-minute response, insurance billing, extraction & drying. Call ' +
+        c.phone.display +
+        ' 24/7.';
+      setMetaProp('og:title', ogTitle);
+      setMetaProp('og:description', ogDesc);
+      setMetaProp('twitter:title', ogTitle);
+      setMetaName('twitter:description', ogDesc);
     }
-    var ogTitle =
-      'Killeen Water Damage Restoration | 24/7 Emergency | ' + c.phone.display;
-    var ogDesc =
-      'Water damage in Killeen, TX? IICRC-certified team. 60-minute response, insurance billing, extraction & drying. Call ' +
-      c.phone.display +
-      ' 24/7.';
-    setMetaProp('og:title', ogTitle);
-    setMetaProp('og:description', ogDesc);
-    setMetaProp('twitter:title', ogTitle);
-    setMetaName('twitter:description', ogDesc);
 
     document.querySelectorAll('a[href^="tel:"]').forEach(function (a) {
       a.setAttribute('href', telUri);
@@ -111,6 +115,7 @@
 
     var ld = {
       '@context': 'https://schema.org',
+      '@id': 'https://killeenwaterdamage.com/#localBusiness',
       '@type': 'EmergencyService',
       name: 'Killeen Water Damage Restoration',
       image: 'https://killeenwaterdamage.com/og.jpg',
